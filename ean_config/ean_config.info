@@ -1,0 +1,4 @@
+name = EAN Config
+description = The main configuratoin for everything related to EAN.
+core = 7.x
+package = EAN

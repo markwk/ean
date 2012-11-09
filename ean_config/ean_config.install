@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * The install and uninstall routines to make sure the database is always cosistent.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function ean_config_uninstall() {
+  variable_del('ean_config_cid');
+  variable_del('ean_config_key');
+}
