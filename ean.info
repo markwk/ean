@@ -1,0 +1,6 @@
+name = EAN API
+description = Provides integration with the Expedia Affiliate Network
+core = 7.x
+package = EAN
+
+files[] = ean.api.inc

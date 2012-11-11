@@ -8,7 +8,8 @@
 /**
  * Implements hook_uninstall().
  */
-function ean_config_uninstall() {
-  variable_del('ean_config_cid');
-  variable_del('ean_config_key');
+function ean_uninstall() {
+  variable_del('ean_cid');
+  variable_del('ean_key');
 }
+

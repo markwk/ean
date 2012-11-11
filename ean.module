@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * @file
+ * This is the file which contains all the global config settings for EAN.
+ */
+
+define('OPERATIONS', 'list,avail,info');
+define('URL', 'http://api.ean.com/ean-services/rs/hotel/v3/');
+
+/**
+ * Implements hook_menu().
+ */
+function ean_menu() {
+  $items = array();
+
+  $items['admin/config/services/ean'] = array(
+    'title' => 'Global EAN config',
+    'description' => t('The main place to enter your global EAN data, such as CID and key'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ean_settings_form'),
+    'access arguments' => array('administer ean'),
+    'file' => 'ean_settings.form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/config/services/ean/test'] = array(
+    'title' => 'Test',
+    'description' => t('Tests the connection with the EAN API'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ean_settings_test'),
+    'access arguments' => array('administer ean'),
+    'file' => 'ean_settings.form.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['admin/config/services/ean/api'] = array(
+    'title' => 'Settings',
+    'weight' => -10,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function ean_permission() {
+  return array(
+    'administer ean' => array(
+      'title' => t('Administer EAN'),
+      'description' => t('Administer the Expedia Affiliate Network.'),
+    ),
+  );
+}
+
+/* EAN API functions */
+
+/**
+ */
+function ean_http_request($operation, $params, $locale = NULL) {
+  $requestElements = array(
+    'cid' => variable_get('ean_cid'),
+    'key' => variable_get('ean_key'),
+    'minorRev' => 16,
+    '_type' => 'json',
+  );
+
+  $validOps = explode(',', OPERATIONS);
+
+  // Check if operation is valid.
+  if (!in_array($operation, $validOps)) {
+    watchdog('ean', "You must provide a valid operation", NULL, WATCHDOG_ERROR);
+    drupal_set_message(t('EAN module: %op is not valid operation given', $operation));
+    return FALSE;
+  }
+
+  // Check if a cid is set.
+  if (empty($requestElements['cid'])) {
+    watchdog('ean', "No CID configured", NULL, WATCHDOG_ERROR);
+    drupal_set_message(t('EAN module: No CID set, please contact your site administrator'));
+    return FALSE;
+  }
+
+  // Check if key is set.
+  if (empty($requestElements['key'])) {
+    watchdog('ean', "No key configured", NULL, WATCHDOG_ERROR);
+    drupal_set_message(t('EAN module: No key set, please contact your site administrator'));
+    return FALSE;
+  }
+
+  $requestElements = array_merge($requestElements, $params);
+  $urlParams = array();
+  foreach ($requestElements as $key => $value) {
+    array_push($urlParams, "$key=$value");
+  }
+
+  $url = URL . $operation . '?' . implode('&', $urlParams);
+  watchdog('ean', $url, NULL, WATCHDOG_NOTICE);
+  $data = json_decode(file_get_contents($url), TRUE);
+  return $data;
+}
