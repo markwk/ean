@@ -56,7 +56,7 @@ function ean_settings_test_validate($form, &$form_state) {
 function ean_settings_test_submit($form, &$form_state) {
   $params = array(
     'hotelId' => $form_state['values']['ean_hotel_id'],
-    'options' => 'HOTEL_DETAILS,PROPERTY_AMENITIES,HOTEL_IMAGES',
+    'options' => 'DEFAULT', //HOTEL_DETAILS,PROPERTY_AMENITIES,HOTEL_IMAGES',
   );
   $data = ean_http_request('info', $params);
 

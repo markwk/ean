@@ -62,7 +62,7 @@ function ean_permission() {
 function ean_http_request($operation, $params, $locale = NULL) {
   $requestElements = array(
     'cid' => variable_get('ean_cid'),
-    'key' => variable_get('ean_key'),
+    'apiKey' => variable_get('ean_key'),
     'minorRev' => 16,
     '_type' => 'json',
   );
@@ -84,7 +84,7 @@ function ean_http_request($operation, $params, $locale = NULL) {
   }
 
   // Check if key is set.
-  if (empty($requestElements['key'])) {
+  if (empty($requestElements['apiKey'])) {
     watchdog('ean', "No key configured", NULL, WATCHDOG_ERROR);
     drupal_set_message(t('EAN module: No key set, please contact your site administrator'));
     return FALSE;
