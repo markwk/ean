@@ -55,6 +55,25 @@ function ean_permission() {
   );
 }
 
+/**
+ *
+ */
+function ean_theme() {
+  return array(
+    'ean_hotel' => array(
+      'arguments' => array(
+        'title' => NULL,
+        'data' => NULL,
+      ),
+      'template' => 'ean-hotel',
+    ),
+  );
+}
+
+function ean_theme_preprocess_ean_hotel($variables) {
+  dsm($variables);
+}
+
 /* EAN API functions */
 
 /**
