@@ -1,2 +1,34 @@
 <?php
+/**
+ * @file
+ * EAN Hotel
+ */
 
+/**
+ * Implements hook_field_info().
+ */
+function ean_hotel_field_info() {
+  return array(
+    'ean_hotelid' => array(
+      'label' => t('Hotel id'),
+      'description' => t('Stores the hotel id of a EAN hotel'),
+      'default_widget' => 'textfield',
+      'default_formatter' => 'default',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_schema().
+ */
+function ean_hotel_field_schema() {
+  return array(
+    'columns' => array(
+      'ean_hotelid' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => FALSE,
+      ),
+    ),
+  );
+}
