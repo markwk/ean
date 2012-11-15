@@ -60,7 +60,7 @@ function ean_hotel_field_formatter_info() {
       'multiple values' => FIELD_BEHAVIOR_DEFAULT,
     ),
     'details' => array(
-      'label' => t('The detailf of the hotel'),
+      'label' => t('The details of the hotel'),
       'field type' => array('ean_hotelid'),
       'multiple values' => FIELD_BEHAVIOR_DEFAULT,
     ),
