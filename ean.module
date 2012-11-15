@@ -78,6 +78,17 @@ function ean_theme_preprocess_ean_hotel($variables) {
 
 /**
  */
+function ean_hotel_info($hotelid) {
+  $params = array(
+    'hotelId' => $hotelid,
+    'options' => 'DEFAULT',
+  );
+
+  return ean_http_request('info', $params);
+}
+
+/**
+ */
 function ean_http_request($operation, $params, $locale = NULL) {
   $requestElements = array(
     'cid' => variable_get('ean_cid'),

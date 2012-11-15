@@ -43,3 +43,45 @@ function ean_hotel_field_is_empty($item, $field) {
     return FALSE;
   }
 }
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function ean_hotel_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label' => t('Default shows all available data'),
+      'field types' => array('ean_hotelid'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+    'summary' => array(
+      'label' => t('Just a summary'),
+      'field type' => array('ean_hotelid'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+    'details' => array(
+      'label' => t('The detailf of the hotel'),
+      'field type' => array('ean_hotelid'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function ean_hotel_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  foreach ($items as $delta => $item) {
+    $ean_hotelid = trim($item['ean_hotelid']);
+    if (!empty($ean_hotelid)) {
+      $hotel = ean_hotel_info($hotelid);
+      // @TODO something with the theme layer to display this page nicely.
+    }
+  }
+
+  return $element;
+}
+
+
