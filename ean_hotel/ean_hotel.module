@@ -32,3 +32,14 @@ function ean_hotel_field_schema() {
     ),
   );
 }
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function ean_hotel_field_is_empty($item, $field) {
+  if (empty($item['ean_hotelid'])) {
+    return TRUE;
+  } else {
+    return FALSE;
+  }
+}
