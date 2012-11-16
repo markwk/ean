@@ -3,4 +3,5 @@ description = Provides a hotel field for content
 core = 7.x
 package = EAN
 
+dependencies[] = field_ui 
 dependencies[] = ean
