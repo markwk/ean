@@ -54,11 +54,7 @@ function ean_settings_test_validate($form, &$form_state) {
 }
 
 function ean_settings_test_submit($form, &$form_state) {
-  $params = array(
-    'hotelId' => $form_state['values']['ean_hotel_id'],
-    'options' => 'DEFAULT', //HOTEL_DETAILS,PROPERTY_AMENITIES,HOTEL_IMAGES',
-  );
-  $data = ean_http_request('info', $params);
+  $data = ean_hotel_info($form_state['values']['ean_hotel_id']);
 
   dsm($data);
 }

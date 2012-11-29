@@ -89,7 +89,7 @@ function ean_hotel_info($hotelid) {
 
 function ean_region($destination) {
   $params = array(
-    'destinationString' => urlencode($destination),
+    'destinationString' => $destination,
     'options' => 'DEFAULT',  
   );
 
@@ -130,14 +130,19 @@ function ean_http_request($operation, $params, $locale = NULL) {
   }
 
   $requestElements = array_merge($requestElements, $params);
-  $urlParams = array();
-  foreach ($requestElements as $key => $value) {
-    array_push($urlParams, "$key=$value");
-  }
-
-  $url = URL . $operation . '?' . implode('&', $urlParams);
+  $url = url(
+    URL . $operation, 
+    array(
+      'query' => $requestElements,
+    )
+  );
   watchdog('ean', $url, NULL, WATCHDOG_NOTICE);
-  dsm($url);
-  $data = json_decode(file_get_contents($url), TRUE);
+  $contents = drupal_http_request(
+    $url
+  );
+
+  dsm($data); 
+  $data = drupal_json_decode($contents->data);
+
   return $data;
 }

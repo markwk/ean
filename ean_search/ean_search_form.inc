@@ -7,6 +7,8 @@
 /**
  */
 function ean_search_block($form, &$form_state) {
+  $form = array();
+
   $form['destination'] = array(
     '#type' => 'textfield',
     '#title' => t('Destination'),
