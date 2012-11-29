@@ -1,0 +1,6 @@
+name = EAN Search
+description = A search block for searching hotels
+core = 7.x
+package = EAN
+
+dependencies[] = ean

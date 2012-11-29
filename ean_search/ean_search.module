@@ -1,0 +1,24 @@
+<?php
+/**
+ * @file
+ * EAN search
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function ean_search_menu() {
+  $items = array();
+
+  $items['ean_search'] = array(
+    'title' => 'EAN search',
+    'description' => 'Searches for hotels with the EAN webservice.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ean_search_block'),
+    'access callback' => TRUE,
+    'file' => 'ean_search_form.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}

@@ -87,6 +87,15 @@ function ean_hotel_info($hotelid) {
   return ean_http_request('info', $params);
 }
 
+function ean_region($destination) {
+  $params = array(
+    'destinationString' => urlencode($destination),
+    'options' => 'DEFAULT',  
+  );
+
+  return ean_http_request('list', $params);
+}
+
 /**
  */
 function ean_http_request($operation, $params, $locale = NULL) {
@@ -128,6 +137,7 @@ function ean_http_request($operation, $params, $locale = NULL) {
 
   $url = URL . $operation . '?' . implode('&', $urlParams);
   watchdog('ean', $url, NULL, WATCHDOG_NOTICE);
+  dsm($url);
   $data = json_decode(file_get_contents($url), TRUE);
   return $data;
 }
