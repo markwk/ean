@@ -44,17 +44,61 @@ function ean_settings_test($form, &$form_state) {
     '#value' => t('Look up hotel'),
   );
 
+  if (isset($form_state['ean_hotel'])) {
+    // The result was posted, so display a pretty form and the raw data. 
+    $form['ean_hotel'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Result'),
+      '#collapsible' => FALSE,
+    );
+
+    // Print the pretty form.
+    $form['ean_hotel'] = array(
+      '#markup' => theme(
+        'ean_hotel', 
+        array(
+          'hotel' => $form_state['ean_hotel'], 
+          'style' => 'details'
+        ), 
+      '#weight' => 5,
+    );
+
+    // Make the fieldset that contains the raw data.
+    $form['ean_hotel']['details'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Details'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#weight' => 10,
+    );
+
+    $form['ean_hotel']['details']['data'] = array(
+      '#markup' => 
+        '<pre><small>' 
+        . print_r($form_state['ean_hotel'], TRUE)
+        . '</small></pre>';
+    );
+  }
+
   return $form;
 }
 
+/**
+ * Validates the test form.
+ */
 function ean_settings_test_validate($form, &$form_state) {
   if (!preg_match('/^[0-9]+$/', $form_state['values']['ean_hotel_id'])) {
     form_set_error('ean_hotel_id', t('That is not a valid EAN id'));
   }
 }
 
+/**
+ * Submits the test form.
+ */
 function ean_settings_test_submit($form, &$form_state) {
   $data = ean_hotel_info($form_state['values']['ean_hotel_id']);
+
+  $form_state['ean_hotel'] = $data;
 
   dsm($data);
 }

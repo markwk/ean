@@ -1,14 +1,22 @@
 <div class="ean-hotel">
   <div class="ean-hotel-summary">
-    <? print $HotelInformationResponse['HotelSummary']['name'] ?>,
-    <? print $HotelInformationResponse['HotelSummary']['hotelRating'] ?> Stars<br />
-    <? print $HotelInformationResponse['HotelSummary']['address1'] ?><br />
-    <? print $HotelInformationResponse['HotelSummary']['city'] ?>,
-    <? print $HotelInformationResponse['HotelSummary']['postalCode'] ?>,
-    <? print $HotelInformationResponse['HotelSummary']['countryCode'] ?><br />
-    <? print $HotelInformationResponse['HotelSummary']['locationDescription'] ?><br />
-    (<? print $hotelInformationResponse['HotelSummary']['latitude'] ?>,
-    <? print $hotelInformationResponse['HotelSummary']['longitude'] ?>)
+    <?php print $HotelInformationResponse['HotelSummary']['name'] ?>,
+    <?php print $HotelInformationResponse['HotelSummary']['hotelRating'] ?>
+    <?php
+    if($HotelInformationResponse['HotelSummary']['hotelRating'] == 1) {
+      t('Star');
+    } else {
+      t('Stars');
+    }
+    ?>
+    <br />
+    <?php print $HotelInformationResponse['HotelSummary']['address1'] ?><br />
+    <?php print $HotelInformationResponse['HotelSummary']['city'] ?>,
+    <?php print $HotelInformationResponse['HotelSummary']['postalCode'] ?>,
+    <?php print $HotelInformationResponse['HotelSummary']['countryCode'] ?><br />
+    <?php print $HotelInformationResponse['HotelSummary']['locationDescription'] ?><br />
+    (<?php print $hotelInformationResponse['HotelSummary']['latitude'] ?>,
+    <?php print $hotelInformationResponse['HotelSummary']['longitude'] ?>)
   </div>
 
   <div class="ean-hotel-amenities">
