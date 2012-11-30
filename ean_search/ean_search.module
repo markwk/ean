@@ -4,10 +4,63 @@
  * EAN search
  */
 
+
+/**
+ * Implements hook_search_info().
+ */
+function ean_search_search_info() {
+  return array(
+    'title' => 'Hotels search',
+    'path' => 'ean_search',
+  );
+}
+
+/**
+ * Implements hook_search_execute().
+ */
+function ean_search_search_execute($keys = NULL, $conditions = NULL) {
+  $hotels = array();
+
+  $data = ean_region($keys);
+  foreach ($data['HotelList']['HotelSummary'] as $hotel) {
+    $hotels[] = array(
+      'title' => $hotel['name'],
+      'link' => $hotel['deepLink'],
+      'snippet' => 
+          '<img style="float: left; padding-right: 3px;" src="http://images.travelnow.com/' . $hotel['thumbNailUrl'] . '"/>'
+          . $hotel['address1'] . '<br />'
+          . $hotel['postalCode'] . ' ' . $hotel['city']
+          . '<br style="clear:both" />'
+        , 
+    );
+  }
+
+  return $hotels;
+}
+
+
+/**
+ * Submits the user's input.
+ */
+function ean_search_block_submit($form, &$form_state) {
+  $destination = $form_state['input']['destination'];
+  drupal_set_message(
+    t(
+      'Searching for @destination', 
+      array(
+        '@destination' => $destination,
+      )
+    )
+  );
+
+  $hotelList = ean_region($destination);
+  dsm($hotelList);
+}
+
 /**
  * Implements hook_menu().
  */
-function ean_search_menu() {
+/*function ean_search_menu() {
   $items = array();
 
   $items['ean_search'] = array(
@@ -22,3 +75,4 @@ function ean_search_menu() {
 
   return $items;
 }
+ */

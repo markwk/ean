@@ -77,7 +77,23 @@ function ean_region($destination) {
     'options' => 'DEFAULT',  
   );
 
-  return ean_http_request('list', $params);
+  $list =  ean_http_request('list', $params);
+  $list = $list['HotelListResponse'];
+
+  foreach ($list['HotelList']['HotelSummary'] as &$hotel) {
+    $hotel['name'] = makeHtml($hotel['name']);
+    $hotel['deepLink'] = makeHtml($hotel['deepLink']);
+  }
+
+  return $list;
+}
+
+function makeHtml($string) {
+  $string = str_replace('&gt;', '>', $string);
+  $string = str_replace('&lt;', '<', $string);
+  $string = str_replace('&amp;', '&', $string);
+
+  return $string;
 }
 
 /**
