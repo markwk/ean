@@ -51,18 +51,18 @@ function ean_settings_test($form, &$form_state) {
       '#title' => t('Result'),
       '#collapsible' => FALSE,
     );
-
+     
     // Print the pretty form.
     $form['ean_hotel'] = array(
       '#markup' => theme(
         'ean_hotel', 
         array(
           'hotel' => $form_state['ean_hotel'], 
-          'style' => 'details'
-        ), 
+        )
+      ), 
       '#weight' => 5,
     );
-
+   
     // Make the fieldset that contains the raw data.
     $form['ean_hotel']['details'] = array(
       '#type' => 'fieldset',
@@ -76,8 +76,9 @@ function ean_settings_test($form, &$form_state) {
       '#markup' => 
         '<pre><small>' 
         . print_r($form_state['ean_hotel'], TRUE)
-        . '</small></pre>';
+        . '</small></pre>',
     );
+   
   }
 
   return $form;
@@ -100,5 +101,7 @@ function ean_settings_test_submit($form, &$form_state) {
 
   $form_state['ean_hotel'] = $data;
 
-  dsm($data);
+  //dsm($data);
+
+  $form_state['rebuild'] = TRUE;
 }

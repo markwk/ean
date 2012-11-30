@@ -55,25 +55,6 @@ function ean_permission() {
   );
 }
 
-/**
- *
- */
-function ean_theme() {
-  return array(
-    'ean_hotel' => array(
-      'arguments' => array(
-        'title' => NULL,
-        'data' => NULL,
-      ),
-      'template' => 'ean-hotel',
-    ),
-  );
-}
-
-function ean_theme_preprocess_ean_hotel($variables) {
-  dsm($variables);
-}
-
 /* EAN API functions */
 
 /**
@@ -84,7 +65,10 @@ function ean_hotel_info($hotelid) {
     'options' => 'DEFAULT',
   );
 
-  return ean_http_request('info', $params);
+  $info = ean_http_request('info', $params);
+  $info = $info['HotelInformationResponse'];
+
+  return $info;
 }
 
 function ean_region($destination) {
@@ -141,7 +125,6 @@ function ean_http_request($operation, $params, $locale = NULL) {
     $url
   );
 
-  dsm($data); 
   $data = drupal_json_decode($contents->data);
 
   return $data;
