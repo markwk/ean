@@ -23,15 +23,17 @@ function ean_search_search_execute($keys = NULL, $conditions = NULL) {
 
   $data = ean_region($keys);
   foreach ($data['HotelList']['HotelSummary'] as $hotel) {
+    $snippet = theme('ean_search_results', array('hotel' => $hotel));
     $hotels[] = array(
       'title' => $hotel['name'],
       'link' => $hotel['deepLink'],
-      'snippet' => 
-          '<img style="float: left; padding-right: 3px;" src="http://images.travelnow.com/' . $hotel['thumbNailUrl'] . '"/>'
-          . $hotel['address1'] . '<br />'
-          . $hotel['postalCode'] . ' ' . $hotel['city']
-          . '<br style="clear:both" />'
-        , 
+//      'snippet' => 
+//          '<img style="float: left; padding-right: 3px;" src="http://images.travelnow.com/' . $hotel['thumbNailUrl'] . '"/>'
+//          . $hotel['address1'] . '<br />'
+//          . $hotel['postalCode'] . ' ' . $hotel['city']
+//          . '<br style="clear:both" />'
+      //        , 
+      'snippet' => $snippet,
     );
   }
 

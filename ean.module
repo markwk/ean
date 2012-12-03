@@ -55,6 +55,22 @@ function ean_permission() {
   );
 }
 
+/**
+ * Implements hook_theme().
+ */
+function ean_theme() {
+  $templates = array(
+    'ean_search_results' => array(
+      'variables' => array(
+        'hotel' => array(),
+      ),
+      'template' => 'ean-search-results',
+    ),
+  );
+
+  return $templates;
+}
+
 /* EAN API functions */
 
 /**
