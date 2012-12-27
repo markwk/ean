@@ -1,0 +1,28 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for the en_hotel module.
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function ean_hotel_field_schema($field) {
+  $columns = array(
+    'ean_hotelid' => array(
+      'type' => 'int',
+      'length' => 8,
+      'not null' => FALSE,
+    ),
+  );
+
+  $indexes = array(
+    'ean_hotelid' => array('ean_hotelid'),
+  );
+
+  return array(
+    'columns' => $columns,
+    'indexes' => $indexes,
+  );
+}
+
