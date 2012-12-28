@@ -9,7 +9,7 @@
  */
 function ean_hotel_field_schema($field) {
   $columns = array(
-    'ean_hotelid' => array(
+    'ean_hotel_id' => array(
       'type' => 'int',
       'length' => 8,
       'not null' => FALSE,
@@ -17,7 +17,7 @@ function ean_hotel_field_schema($field) {
   );
 
   $indexes = array(
-    'ean_hotelid' => array('ean_hotelid'),
+    'ean_hotel_id' => array('ean_hotel_id'),
   );
 
   return array(

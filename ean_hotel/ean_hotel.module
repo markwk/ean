@@ -37,7 +37,6 @@ function ean_hotel_field_widget_form(&$form, &$form_state, $field, $instance, $l
   $element['ean_hotel_id'] = array(
     '#title' => t('EAN hotel id'),
     '#type' => 'textfield',
-    '#required' => TRUE,
   );
 
   return $element;
@@ -47,7 +46,7 @@ function ean_hotel_field_widget_form(&$form, &$form_state, $field, $instance, $l
  * Implements hook_field_is_empty().
  */
 function ean_hotel_field_is_empty($item, $field) {
-  if (empty($item['ean_hotelid'])) {
+  if (empty($item['ean_hotel_id'])) {
     return TRUE;
   } else {
     return FALSE;
