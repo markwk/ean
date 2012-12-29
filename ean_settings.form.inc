@@ -101,7 +101,5 @@ function ean_settings_test_submit($form, &$form_state) {
 
   $form_state['ean_hotel'] = $data;
 
-  //dsm($data);
-
   $form_state['rebuild'] = TRUE;
 }
