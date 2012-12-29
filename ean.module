@@ -66,6 +66,12 @@ function ean_theme() {
       ),
       'template' => 'ean-search-results',
     ),
+    'ean_hotel_info' => array(
+      'variables' => array(
+        'hotel' => array(),
+      ),
+      'template' => 'ean-hotel-info',
+    ),
   );
 
   return $templates;
