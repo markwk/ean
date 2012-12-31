@@ -27,12 +27,6 @@ function ean_search_search_execute($keys = NULL, $conditions = NULL) {
     $hotels[] = array(
       'title' => $hotel['name'],
       'link' => $hotel['deepLink'],
-//      'snippet' => 
-//          '<img style="float: left; padding-right: 3px;" src="http://images.travelnow.com/' . $hotel['thumbNailUrl'] . '"/>'
-//          . $hotel['address1'] . '<br />'
-//          . $hotel['postalCode'] . ' ' . $hotel['city']
-//          . '<br style="clear:both" />'
-      //        , 
       'snippet' => $snippet,
     );
   }
@@ -57,23 +51,3 @@ function ean_search_block_submit($form, &$form_state) {
 
   $hotelList = ean_region($destination);
 }
-
-/**
- * Implements hook_menu().
- */
-/*function ean_search_menu() {
-  $items = array();
-
-  $items['ean_search'] = array(
-    'title' => 'EAN search',
-    'description' => 'Searches for hotels with the EAN webservice.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('ean_search_block'),
-    'access callback' => TRUE,
-    'file' => 'ean_search_form.inc',
-    'type' => MENU_NORMAL_ITEM,
-  );
-
-  return $items;
-}
- */
