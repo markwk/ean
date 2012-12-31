@@ -16,7 +16,7 @@ function ean_menu() {
 
   $items['admin/config/services/ean'] = array(
     'title' => 'Global EAN config',
-    'description' => t('The main place to enter your global EAN data, such as CID and key'),
+    'description' => 'The main place to enter your global EAN data, such as CID and key',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ean_settings_form'),
     'access arguments' => array('administer ean'),
@@ -26,7 +26,7 @@ function ean_menu() {
 
   $items['admin/config/services/ean/test'] = array(
     'title' => 'Test',
-    'description' => t('Tests the connection with the EAN API'),
+    'description' => 'Tests the connection with the EAN API',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ean_settings_test'),
     'access arguments' => array('administer ean'),
