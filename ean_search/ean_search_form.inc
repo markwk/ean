@@ -47,5 +47,5 @@ function ean_search_block_submit($form, &$form_state) {
     )
   );
 
-  $hotelList = ean_region($destination);
+  //$hotelList = ean_region($destination);
 }
