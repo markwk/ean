@@ -96,7 +96,7 @@ function ean_hotel_info($hotelid) {
 function ean_region($destination) {
   $params = array(
     'destinationString' => $destination,
-    'options' => 'DEFAULT',  
+    'options' => 'DEFAULT',
   );
 
   $list =  ean_http_request('list', $params);
@@ -153,7 +153,7 @@ function ean_http_request($operation, $params, $locale = NULL) {
 
   $requestElements = array_merge($requestElements, $params);
   $url = url(
-    URL . $operation, 
+    URL . $operation,
     array(
       'query' => $requestElements,
     )
