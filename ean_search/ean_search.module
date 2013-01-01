@@ -42,7 +42,7 @@ function ean_search_block_submit($form, &$form_state) {
   $destination = $form_state['input']['destination'];
   drupal_set_message(
     t(
-      'Searching for @destination', 
+      'Searching for @destination',
       array(
         '@destination' => $destination,
       )

@@ -45,24 +45,24 @@ function ean_settings_test($form, &$form_state) {
   );
 
   if (isset($form_state['ean_hotel'])) {
-    // The result was posted, so display a pretty form and the raw data. 
+    // The result was posted, so display a pretty form and the raw data.
     $form['ean_hotel'] = array(
       '#type' => 'fieldset',
       '#title' => t('Result'),
       '#collapsible' => FALSE,
     );
-     
+
     // Print the pretty form.
     $form['ean_hotel'] = array(
       '#markup' => theme(
-        'ean_hotel', 
+        'ean_hotel',
         array(
-          'hotel' => $form_state['ean_hotel'], 
+          'hotel' => $form_state['ean_hotel'],
         )
-      ), 
+      ),
       '#weight' => 5,
     );
-   
+
     // Make the fieldset that contains the raw data.
     $form['ean_hotel']['details'] = array(
       '#type' => 'fieldset',
@@ -73,12 +73,11 @@ function ean_settings_test($form, &$form_state) {
     );
 
     $form['ean_hotel']['details']['data'] = array(
-      '#markup' => 
-        '<pre><small>' 
+      '#markup' =>
+        '<pre><small>'
         . print_r($form_state['ean_hotel'], TRUE)
         . '</small></pre>',
     );
-   
   }
 
   return $form;
