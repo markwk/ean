@@ -80,6 +80,7 @@ function ean_theme() {
 /* EAN API functions */
 
 /**
+ * Retrieves the info about a hotel from the Expedia Affiliate Network.
  */
 function ean_hotel_info($hotelid) {
   $params = array(
@@ -93,24 +94,33 @@ function ean_hotel_info($hotelid) {
   return $info;
 }
 
+/**
+ * Retrieves a list of hotels based on a reagion string from EAN.
+ */
 function ean_region($destination) {
   $params = array(
     'destinationString' => $destination,
     'options' => 'DEFAULT',
   );
 
-  $list =  ean_http_request('list', $params);
+  $list = ean_http_request('list', $params);
   $list = $list['HotelListResponse'];
 
   foreach ($list['HotelList']['HotelSummary'] as &$hotel) {
-    $hotel['name'] = makeHtml($hotel['name']);
-    $hotel['deepLink'] = makeHtml($hotel['deepLink']);
+    $hotel['name'] = ean_make_html($hotel['name']);
+    $hotel['deepLink'] = ean_make_html($hotel['deepLink']);
   }
 
   return $list;
 }
 
-function makeHtml($string) {
+/**
+ * Replace the HTML encoded characters by actual HTML.
+ * So &gt; becomes >
+ * &lt; becomes <
+ * &amp; becomes &
+ */
+function ean_make_html($string) {
   $string = str_replace('&gt;', '>', $string);
   $string = str_replace('&lt;', '<', $string);
   $string = str_replace('&amp;', '&', $string);

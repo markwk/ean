@@ -2,7 +2,7 @@
 
 /**
  * @file
- * The install and uninstall routines to make sure the database is always cosistent.
+ * The uninstall routine to make sure the database is always cosistent.
  */
 
 /**
@@ -12,4 +12,3 @@ function ean_uninstall() {
   variable_del('ean_cid');
   variable_del('ean_key');
 }
-
