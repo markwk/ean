@@ -33,21 +33,3 @@ function ean_search_search_execute($keys = NULL, $conditions = NULL) {
 
   return $hotels;
 }
-
-
-/**
- * Submits the user's input.
- */
-function ean_search_block_submit($form, &$form_state) {
-  $destination = $form_state['input']['destination'];
-  drupal_set_message(
-    t(
-      'Searching for @destination',
-      array(
-        '@destination' => $destination,
-      )
-    )
-  );
-
-  $hotelList = ean_region($destination);
-}

@@ -25,4 +25,3 @@ function ean_hotel_field_schema($field) {
     'indexes' => $indexes,
   );
 }
-

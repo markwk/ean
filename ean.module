@@ -116,9 +116,6 @@ function ean_region($destination) {
 
 /**
  * Replace the HTML encoded characters by actual HTML.
- * So &gt; becomes >
- * &lt; becomes <
- * &amp; becomes &
  */
 function ean_make_html($string) {
   $string = str_replace('&gt;', '>', $string);
@@ -129,9 +126,10 @@ function ean_make_html($string) {
 }
 
 /**
+ * Actually make a request to the EAN webservice.
  */
 function ean_http_request($operation, $params, $locale = NULL) {
-  $requestElements = array(
+  $request_elements = array(
     'cid' => variable_get('ean_cid'),
     'apiKey' => variable_get('ean_key'),
     'minorRev' => 16,
@@ -148,24 +146,24 @@ function ean_http_request($operation, $params, $locale = NULL) {
   }
 
   // Check if a cid is set.
-  if (empty($requestElements['cid'])) {
+  if (empty($request_elements['cid'])) {
     watchdog('ean', "No CID configured", NULL, WATCHDOG_ERROR);
     drupal_set_message(t('EAN module: No CID set, please contact your site administrator'));
     return FALSE;
   }
 
   // Check if key is set.
-  if (empty($requestElements['apiKey'])) {
+  if (empty($request_elements['apiKey'])) {
     watchdog('ean', "No key configured", NULL, WATCHDOG_ERROR);
     drupal_set_message(t('EAN module: No key set, please contact your site administrator'));
     return FALSE;
   }
 
-  $requestElements = array_merge($requestElements, $params);
+  $request_elements = array_merge($request_elements, $params);
   $url = url(
     URL . $operation,
     array(
-      'query' => $requestElements,
+      'query' => $request_elements,
     )
   );
   watchdog('ean', $url, NULL, WATCHDOG_NOTICE);
