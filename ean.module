@@ -136,10 +136,10 @@ function ean_http_request($operation, $params, $locale = NULL) {
     '_type' => 'json',
   );
 
-  $validOps = explode(',', OPERATIONS);
+  $valid_ops = explode(',', OPERATIONS);
 
   // Check if operation is valid.
-  if (!in_array($operation, $validOps)) {
+  if (!in_array($operation, $valid_ops)) {
     watchdog('ean', "You must provide a valid operation", NULL, WATCHDOG_ERROR);
     drupal_set_message(t('EAN module: %op is not valid operation given', $operation));
     return FALSE;
