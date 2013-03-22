@@ -73,10 +73,9 @@ function ean_settings_test($form, &$form_state) {
     );
 
     $form['ean_hotel']['details']['data'] = array(
-      '#markup' =>
-        '<pre><small>'
-        . print_r($form_state['ean_hotel'], TRUE)
-        . '</small></pre>',
+      '#markup' => '<pre><small>'
+      . print_r($form_state['ean_hotel'], TRUE)
+      . '</small></pre>',
     );
   }
 
