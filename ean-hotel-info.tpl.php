@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * @file
+ * Default theme implementation for the EAN hotel module.
+ * It basically provides you with an example of how to use the module.
+ */
+?>
 <h2><?php print ($hotel['HotelSummary']['name']) ?></h2>
 <?php print ($hotel['HotelSummary']['hotelRating']) ?> stars
 <div class="address">
