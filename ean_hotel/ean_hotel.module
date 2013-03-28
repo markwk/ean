@@ -83,3 +83,20 @@ function ean_hotel_field_formatter_view($entity_type, $entity, $field, $instance
 
   return $element;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function ean_hotel_theme() {
+  $templates = array(
+    'ean_hotel_info' => array(
+      'variables' => array(
+        'hotel' => array(),
+      ),
+      'template' => 'ean-hotel-info',
+    ),
+  );
+
+  return $templates;
+}
+

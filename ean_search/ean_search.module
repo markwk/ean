@@ -16,6 +16,23 @@ function ean_search_search_info() {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function ean_search_theme() {
+  $templates = array(
+    'ean_search_results' => array(
+      'variables' => array(
+        'hotel' => array(),
+      ),
+      'template' => 'ean-search-results',
+    ),
+  );
+
+  return $templates;
+}
+
+
+/**
  * Implements hook_search_execute().
  */
 function ean_search_search_execute($keys = NULL, $conditions = NULL) {
