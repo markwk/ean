@@ -1,3 +1,13 @@
+CONTENTS OF THIS FILE
+---------------------
+
+* Introduction
+* Installation
+
+
+INTRODUCTION
+------------
+
 Provides a way to connect to the Expedia Affiliate Network.
 
 I wanted a way to display hotels on my pages and there wasn't any module for 
@@ -25,3 +35,15 @@ EAN hotel:
 This module provides a customm field in which you may enter an EAN hotelid. 
 And it will format the hotel with that id nicely. It also has it's own template
 in case you don't like the default one. 
+
+
+INSTALLATION
+------------
+
+The EAN suite of modules are like any other Drupal module. Just download them
+place them in you sites/all/modules/ directory and enable them.
+
+After you have done this head to admin/config/services/ean and give the CID and
+key given to you when you registered on http://developer.ean.com/
+
+
