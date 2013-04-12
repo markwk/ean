@@ -45,5 +45,3 @@ place them in you sites/all/modules/ directory and enable them.
 
 After you have done this head to admin/config/services/ean and give the CID and
 key given to you when you registered on http://developer.ean.com/
-
-

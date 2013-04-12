@@ -99,4 +99,3 @@ function ean_hotel_theme() {
 
   return $templates;
 }
-
