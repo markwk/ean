@@ -38,7 +38,7 @@ function ean_search_theme() {
 function ean_search_search_execute($keys = NULL, $conditions = NULL) {
   $hotels = array();
 
-  $data = ean_region($keys);
+  $data = ean_region(check_plain($keys));
   foreach ($data['HotelList']['HotelSummary'] as $hotel) {
     $snippet = theme('ean_search_results', array('hotel' => $hotel));
     $hotels[] = array(
