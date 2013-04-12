@@ -5,8 +5,8 @@
  * This is the file which contains all the global config settings for EAN.
  */
 
-define('OPERATIONS', 'list,avail,info');
-define('URL', 'http://api.ean.com/ean-services/rs/hotel/v3/');
+define('EAN_OPERATIONS', 'list,avail,info');
+define('EAN_URL', 'http://api.ean.com/ean-services/rs/hotel/v3/');
 
 /**
  * Implements hook_menu().
@@ -114,7 +114,7 @@ function ean_http_request($operation, $params, $locale = NULL) {
     '_type' => 'json',
   );
 
-  $valid_ops = explode(',', OPERATIONS);
+  $valid_ops = explode(',', EAN_OPERATIONS);
 
   // Check if operation is valid.
   if (!in_array($operation, $valid_ops)) {
@@ -139,7 +139,7 @@ function ean_http_request($operation, $params, $locale = NULL) {
 
   $request_elements = array_merge($request_elements, $params);
   $url = url(
-    URL . $operation,
+    EAN_URL . $operation,
     array(
       'query' => $request_elements,
     )
@@ -150,6 +150,5 @@ function ean_http_request($operation, $params, $locale = NULL) {
   );
 
   $data = drupal_json_decode($contents->data);
-  dsm($data);
   return $data;
 }
