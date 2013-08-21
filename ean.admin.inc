@@ -95,7 +95,7 @@ function ean_settings_test_validate($form, &$form_state) {
  * Submits the test form.
  */
 function ean_settings_test_submit($form, &$form_state) {
-  $data = ean_hotel_info($form_state['values']['ean_hotel_id']);
+  $data = ean_fetch_hotel_info($form_state['values']['ean_hotel_id']);
 
   $form_state['ean_hotel'] = $data;
 

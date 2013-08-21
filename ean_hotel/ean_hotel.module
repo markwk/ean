@@ -74,7 +74,7 @@ function ean_hotel_field_formatter_view($entity_type, $entity, $field, $instance
   $element = array();
 
   foreach ($items as $delta => $item) {
-    $data = ean_hotel_info($item['ean_hotel_id']);
+    $data = ean_fetch_hotel_info($item['ean_hotel_id']);
     $snippet = theme('ean_hotel_info', array('hotel' => $data));
     $element[] = array(
       '#markup' => $snippet,

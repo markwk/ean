@@ -60,7 +60,7 @@ function ean_permission() {
 /**
  * Retrieves the info about a hotel from the Expedia Affiliate Network.
  */
-function ean_hotel_info($hotelid) {
+function ean_fetch_hotel_info($hotelid) {
   $params = array(
     'hotelId' => $hotelid,
     'options' => 'DEFAULT',
