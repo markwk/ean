@@ -4,6 +4,11 @@
  * EAN hotel
  */
 
+function ean_hotel_init() {
+	drupal_add_js(drupal_get_path('module', 'ean_hotel') . '/js/jquery.galleriffic.js');
+	drupal_add_css(drupal_get_path('module', 'ean_hotel') . '/css/eangallery.css');
+}
+
 /**
  * Implements hook_field_info().
  */
@@ -80,6 +85,10 @@ function ean_hotel_field_formatter_info() {
 	   'label' => t('The hotel description'),
 	   'field types' => array('ean_hotel_hotelid'),
 	),
+	'ean_hotel_hotelid_gallery' => array(
+	   'label' => t('The hotel images gallery'),
+	   'field types' => array('ean_hotel_hotelid'),
+	),
   );
 }
 
@@ -132,6 +141,15 @@ function ean_hotel_field_formatter_view($entity_type, $entity, $field, $instance
 		    );
 		  }
 		break;
+		case 'ean_hotel_hotelid_gallery':
+			foreach ($items as $delta => $item) {
+		    $data = ean_hotel_info($item['ean_hotel_id']);
+		    $snippet = theme('ean_hotel_gallery', array('hotel' => $data));
+		    $element[] = array(
+		      '#markup' => $snippet,
+		    );
+		  }
+		break;
 	}
 
   return $element;
@@ -166,6 +184,12 @@ function ean_hotel_theme() {
 	    ),
 	    'template' => 'templates/ean-hotel-description',
 	  ),
+		'ean_hotel_gallery' => array(
+	    'variables' => array(
+	      'hotel' => array(),
+	    ),
+	    'template' => 'templates/ean-hotel-gallery',
+	  ),		
   );
 
   return $templates;
