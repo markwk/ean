@@ -13,7 +13,7 @@ function ean_hotel_field_info() {
       'label' => t('Hotel id'),
       'description' => t('Stores the hotel id of a EAN hotel'),
       'default_widget' => 'ean_hotel_hotelid_widget',
-      'default_formatter' => 'ean_hotel_hotelid_formatter',
+      'default_formatter' => 'ean_hotel_hotelid',
     ),
   );
 }
@@ -60,10 +60,26 @@ function ean_hotel_field_is_empty($item, $field) {
  */
 function ean_hotel_field_formatter_info() {
   return array(
+	'ean_hotel_hotelid' => array(
+	   'label' => t('Hotel Id'),
+		'field types' => array('ean_hotel_hotelid'),
+	 ),
     'ean_hotel_hotelid_formatter' => array(
       'label' => t('The full hotel'),
       'field types' => array('ean_hotel_hotelid'),
     ),
+	'ean_hotel_hotelid_images' => array(
+	  'label' => t('The hotel images'),
+	    'field types' => array('ean_hotel_hotelid'),
+	 ),
+	'ean_hotel_hotelid_main_image' => array(
+	   'label' => t('The hotel main image thumbnail'),
+	   'field types' => array('ean_hotel_hotelid'),
+	),
+	'ean_hotel_hotelid_description' => array(
+	   'label' => t('The hotel description'),
+	   'field types' => array('ean_hotel_hotelid'),
+	),
   );
 }
 
@@ -72,14 +88,51 @@ function ean_hotel_field_formatter_info() {
  */
 function ean_hotel_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
-
-  foreach ($items as $delta => $item) {
-    $data = ean_fetch_hotel_info($item['ean_hotel_id']);
-    $snippet = theme('ean_hotel_info', array('hotel' => $data));
-    $element[] = array(
-      '#markup' => $snippet,
-    );
-  }
+  switch ($display['type']) {
+	  case 'ean_hotel_hotelid':
+		  foreach ($items as $delta => $item) {
+		    $element[] = array(
+		      '#markup' => $item['ean_hotel_id'],
+		    );
+		  }
+		break;
+	  case 'ean_hotel_hotelid_formatter':
+		  foreach ($items as $delta => $item) {
+		    $data = ean_hotel_info($item['ean_hotel_id']);
+		    $snippet = theme('ean_hotel_info', array('hotel' => $data));
+		    $element[] = array(
+		      '#markup' => $snippet,
+		    );
+		  }
+		break;
+		case 'ean_hotel_hotelid_images':
+			foreach ($items as $delta => $item) {
+		    $data = ean_hotel_info($item['ean_hotel_id']);
+		    $snippet = theme('ean_hotel_images', array('hotel' => $data));
+		    $element[] = array(
+		      '#markup' => $snippet,
+		    );
+		  }
+		break;
+		case 'ean_hotel_hotelid_main_image':
+			foreach ($items as $delta => $item) {
+		    $data = ean_hotel_info($item['ean_hotel_id']);
+		    $snippet = theme('ean_hotel_main_image', array('hotel' => $data));
+		    $element[] = array(
+		      '#markup' => $snippet,
+		    );
+		  }
+		break;
+		case 'ean_hotel_hotelid_description':
+			foreach ($items as $delta => $item) {
+		    $data = ean_hotel_info($item['ean_hotel_id']);
+		    $snippet = theme('ean_hotel_description', array('hotel' => $data));
+		    $element[] = array(
+		      '#markup' => $snippet,
+		    );
+		  }
+		break;
+	}
 
   return $element;
 }
@@ -93,8 +146,26 @@ function ean_hotel_theme() {
       'variables' => array(
         'hotel' => array(),
       ),
-      'template' => 'ean-hotel-info',
+      'template' => 'templates/ean-hotel-info',
     ),
+	  'ean_hotel_images' => array(
+	    'variables' => array(
+	      'hotel' => array(),
+	    ),
+	    'template' => 'templates/ean-hotel-images',
+	  ),
+		'ean_hotel_main_image' => array(
+	    'variables' => array(
+	      'hotel' => array(),
+	    ),
+	    'template' => 'templates/ean-hotel-main-image',
+	  ),
+		'ean_hotel_description' => array(
+	    'variables' => array(
+	      'hotel' => array(),
+	    ),
+	    'template' => 'templates/ean-hotel-description',
+	  ),
   );
 
   return $templates;

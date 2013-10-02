@@ -18,9 +18,9 @@ function ean_menu() {
     'title' => 'Global EAN config',
     'description' => 'The main place to enter your global EAN data, such as CID and key',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('ean_admin'),
+    'page arguments' => array('ean_settings_form'),
     'access arguments' => array('administer ean'),
-    'file' => 'ean.admin.inc',
+    'file' => 'ean_settings.form.inc',
     'type' => MENU_NORMAL_ITEM,
   );
 
@@ -30,7 +30,7 @@ function ean_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ean_settings_test'),
     'access arguments' => array('administer ean'),
-    'file' => 'ean.admin.inc',
+    'file' => 'ean_settings.form.inc',
     'type' => MENU_LOCAL_TASK,
   );
 
@@ -60,7 +60,7 @@ function ean_permission() {
 /**
  * Retrieves the info about a hotel from the Expedia Affiliate Network.
  */
-function ean_fetch_hotel_info($hotelid) {
+function ean_hotel_info($hotelid) {
   $params = array(
     'hotelId' => $hotelid,
     'options' => 'DEFAULT',
